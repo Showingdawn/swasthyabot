@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,9 +11,11 @@ import { SymptomChecker } from '@/components/symptom-checker';
 import { FakeNewsFilter } from '@/components/fake-news-filter';
 import { Newspaper, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslation } from '@/context/translation-context';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image-gov');
+  const { t } = useTranslation();
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -22,20 +27,18 @@ export default function Home() {
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                    Your Personal AI Health Companion
+                    {t('home.hero.title')}
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    SwasthyaBot provides instant health insights, symptom
-                    analysis, and helps you identify fake health news, all in one
-                    place. An initiative by the Ministry of Health, Govt. of Odisha.
+                    {t('home.hero.description')}
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg">
-                    <a href="#features">Get Started</a>
+                    <a href="#features">{t('home.hero.getStarted')}</a>
                   </Button>
-                   <Button asChild size="lg" variant="outline">
-                    <Link href="/power-bi-portal">View Analytics</Link>
+                  <Button asChild size="lg" variant="outline">
+                    <Link href="/power-bi-portal">{t('home.hero.viewAnalytics')}</Link>
                   </Button>
                 </div>
               </div>
@@ -63,11 +66,11 @@ export default function Home() {
                 <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="symptom-checker">
                     <Stethoscope className="mr-2 h-4 w-4" />
-                    Symptom Checker
+                    {t('home.tabs.symptomChecker')}
                   </TabsTrigger>
                   <TabsTrigger value="news-filter">
                     <Newspaper className="mr-2 h-4 w-4" />
-                    News Verifier
+                    {t('home.tabs.newsVerifier')}
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="symptom-checker" className="mt-4">

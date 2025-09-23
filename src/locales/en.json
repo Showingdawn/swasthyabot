@@ -1,0 +1,26 @@
+
+{
+  "header": {
+    "title": "SwasthyaBot",
+    "subtitle": "Ministry of Health, Govt. of Odisha",
+    "nav": {
+      "home": "Home",
+      "powerBiPortal": "Power BI Portal"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Your Personal AI Health Companion",
+      "description": "SwasthyaBot provides instant health insights, symptom analysis, and helps you identify fake health news, all in one place. An initiative by the Ministry of Health, Govt. of Odisha.",
+      "getStarted": "Get Started",
+      "viewAnalytics": "View Analytics"
+    },
+    "tabs": {
+      "symptomChecker": "Symptom Checker",
+      "newsVerifier": "News Verifier"
+    }
+  },
+  "footer": {
+    "disclaimer": "Disclaimer: This is an AI-powered tool for informational purposes only and not a substitute for professional medical advice. Always consult a healthcare provider for any medical concerns."
+  }
+}

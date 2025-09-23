@@ -1,6 +1,8 @@
 
+'use client';
+
 import Link from 'next/link';
-import { AreaChart, Globe, Menu } from 'lucide-react';
+import { Globe, Menu } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,11 +17,14 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { OdishaLogo } from '../icons';
+import { useTranslation } from '@/context/translation-context';
 
 export function Header() {
+  const { t, setLanguage } = useTranslation();
+
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Power BI Portal', href: '/power-bi-portal' },
+    { name: t('header.nav.home'), href: '/' },
+    { name: t('header.nav.powerBiPortal'), href: '/power-bi-portal' },
   ];
 
   return (
@@ -29,10 +34,10 @@ export function Header() {
           <OdishaLogo className="h-8 w-8 text-primary" />
           <div className='flex flex-col'>
             <span className="hidden font-bold sm:inline-block">
-              SwasthyaBot
+              {t('header.title')}
             </span>
             <span className="hidden text-xs text-muted-foreground sm:inline-block">
-              Ministry of Health, Govt. of Odisha
+              {t('header.subtitle')}
             </span>
           </div>
         </Link>
@@ -57,9 +62,9 @@ export function Header() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>English</DropdownMenuItem>
-              <DropdownMenuItem>ଓଡ଼ିଆ</DropdownMenuItem>
-              <DropdownMenuItem>हिन्दी</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('en')}>English</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('or')}>ଓଡ଼ିଆ</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setLanguage('hi')}>हिन्दी</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
