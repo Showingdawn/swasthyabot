@@ -1,10 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-image",
-      "description": "An abstract image representing health and technology, with soft blue and purple tones.",
-      "imageUrl": "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxoZWFsdGglMjB0ZWNobm9sb2d5fGVufDB8fHx8MTc1ODYxNjI3MXww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "health technology"
+      "id": "hero-image-gov",
+      "description": "An image of the Konark Sun Temple Wheel, a symbol of Odisha, with a modern technological overlay.",
+      "imageUrl": "https://images.unsplash.com/photo-1565018054866-968e244671af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxvZGlzaGElMjBnb3Zlcm5tZW50fGVufDB8fHx8MTc1ODY3MDI5MXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "odisha government"
     }
   ]
 }

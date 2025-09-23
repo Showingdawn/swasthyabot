@@ -1,4 +1,5 @@
-# **App Name**: Swasthya Lite
+# **App Name**: Swasthyabot
+
 
 ## Core Features:
 

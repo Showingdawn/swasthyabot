@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Globe, Menu } from 'lucide-react';
+import { AreaChart, Globe, Menu } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -14,22 +14,28 @@ import {
   SheetContent,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { Logo } from '../icons';
+import { OdishaLogo } from '../icons';
 
 export function Header() {
   const navItems = [
-    { name: 'Features', href: '#features' },
-    { name: 'GitHub', href: 'https://github.com', external: true },
+    { name: 'Home', href: '/' },
+    { name: 'Power BI Portal', href: '/power-bi-portal' },
+    { name: 'GitHub', href: 'https://github.com/GoogleCloudPlatform/firebase-genkit-samples/tree/main/studio-apps/swasthya-lite', external: true },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <Link href="/" className="mr-6 flex items-center gap-2">
-          <Logo className="h-6 w-6 text-primary" />
-          <span className="hidden font-headline text-lg font-bold sm:inline-block">
-            Swasthya Lite
-          </span>
+          <OdishaLogo className="h-8 w-8 text-primary" />
+          <div className='flex flex-col'>
+            <span className="hidden font-bold sm:inline-block">
+              SwasthyaBot
+            </span>
+            <span className="hidden text-xs text-muted-foreground sm:inline-block">
+              Ministry of Health, Govt. of Odisha
+            </span>
+          </div>
         </Link>
 
         <div className="flex flex-1 items-center justify-end gap-2">
@@ -55,8 +61,8 @@ export function Header() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>English</DropdownMenuItem>
+              <DropdownMenuItem disabled>ଓଡ଼ିଆ (Coming Soon)</DropdownMenuItem>
               <DropdownMenuItem disabled>हिन्दी (Coming Soon)</DropdownMenuItem>
-              <DropdownMenuItem disabled>বাংলা (Coming Soon)</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 

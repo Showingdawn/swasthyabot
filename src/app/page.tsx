@@ -7,9 +7,10 @@ import { Footer } from '@/components/layout/footer';
 import { SymptomChecker } from '@/components/symptom-checker';
 import { FakeNewsFilter } from '@/components/fake-news-filter';
 import { Newspaper, Stethoscope } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image');
+  const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image-gov');
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -20,18 +21,21 @@ export default function Home() {
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
-                  <h1 className="font-headline text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                  <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                     Your Personal AI Health Companion
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Swasthya Lite provides instant health insights, symptom
+                    SwasthyaBot provides instant health insights, symptom
                     analysis, and helps you identify fake health news, all in one
-                    place.
+                    place. An initiative by the Ministry of Health, Govt. of Odisha.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Button asChild size="lg">
                     <a href="#features">Get Started</a>
+                  </Button>
+                   <Button asChild size="lg" variant="outline">
+                    <Link href="/power-bi-portal">View Analytics</Link>
                   </Button>
                 </div>
               </div>
@@ -51,7 +55,7 @@ export default function Home() {
 
         <section
           id="features"
-          className="w-full bg-background-muted py-12 md:py-24 lg:py-32"
+          className="w-full bg-muted py-12 md:py-24 lg:py-32"
         >
           <div className="container px-4 md:px-6">
             <div className="mx-auto w-full max-w-3xl">
