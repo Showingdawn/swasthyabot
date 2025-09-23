@@ -15,37 +15,6 @@ const newsSchema = z
   .min(50, 'Please provide a longer news article for better analysis (at least 50 characters).')
   .max(5000, 'Please keep the article under 5000 characters.');
 
-// This is a simplified health risk calculation.
-// In a real-world application, this would involve a much more sophisticated algorithm.
-const calculateHealthRisk = (symptoms: string): number => {
-  let score = 0;
-  const lowerCaseSymptoms = symptoms.toLowerCase();
-
-  const highRiskKeywords = [
-    'chest pain', 'breathing difficulty', 'severe headache', 'vision loss', 'paralysis', 'unconscious', 'seizure'
-  ];
-  const mediumRiskKeywords = [
-    'high fever', 'dizziness', 'shortness of breath', 'confusion', 'severe pain', 'vomiting blood'
-  ];
-
-  score += (lowerCaseSymptoms.match(/\b(\w+)\b/g) || []).length * 0.5;
-
-  highRiskKeywords.forEach(keyword => {
-    if (lowerCaseSymptoms.includes(keyword)) {
-      score += 15;
-    }
-  });
-
-  mediumRiskKeywords.forEach(keyword => {
-    if (lowerCaseSymptoms.includes(keyword)) {
-      score += 7;
-    }
-  });
-  
-  // Normalize to 0-100 range
-  return Math.min(100, Math.round(score));
-};
-
 export async function getHealthTipsAction(
   prevState: any,
   formData: FormData
@@ -62,15 +31,12 @@ export async function getHealthTipsAction(
   }
 
   try {
-    const tipsPromise = personalizedHealthTips({ symptoms: validatedFields.data });
-    const riskScore = calculateHealthRisk(validatedFields.data);
+    const tips = await personalizedHealthTips({ symptoms: validatedFields.data });
     
-    // TODO: Implement Power BI data push
     // The anonymized symptom data could be sent to a Power BI push dataset here.
-    // Example: await pushToPowerBI({ symptom: validatedFields.data, riskScore, timestamp: new Date() });
+    // Example: await pushToPowerBI({ symptom: validatedFields.data, timestamp: new Date() });
 
-    const tips = await tipsPromise;
-    return { message: 'success', data: { ...tips, riskScore }, errors: null };
+    return { message: 'success', data: tips, errors: null };
   } catch (e) {
     console.error(e);
     return { message: 'AI error. Please try again later.', data: null, errors: null };
