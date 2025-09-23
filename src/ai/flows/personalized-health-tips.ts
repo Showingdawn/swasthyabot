@@ -27,12 +27,18 @@ export type PersonalizedHealthTipsInput = z.infer<
 
 /**
  * Defines the output schema for the personalized health tips flow.
- * It returns a string containing personalized health tips.
+ * It returns a structured object containing analysis, cures, and medicine suggestions.
  */
 const PersonalizedHealthTipsOutputSchema = z.object({
-  healthTips: z
+  symptomAnalysis: z
     .string()
-    .describe('Personalized health tips based on the user symptoms.'),
+    .describe('A brief analysis and potential interpretation of the symptoms provided.'),
+  recommendedCure: z
+    .string()
+    .describe('Recommended non-medicinal actions, home remedies, or lifestyle adjustments to help alleviate the symptoms.'),
+  suggestedMedicines: z
+    .string()
+    .describe('A list of suggested over-the-counter medicines that may help. This should always include a strong disclaimer to consult a doctor before taking any medication.'),
 });
 export type PersonalizedHealthTipsOutput = z.infer<
   typeof PersonalizedHealthTipsOutputSchema
@@ -51,7 +57,7 @@ export async function personalizedHealthTips(
 
 /**
  * Defines the prompt for generating personalized health tips.
- * It uses the user's symptoms as input and instructs the AI to generate relevant health tips.
+ * It uses the user's symptoms as input and instructs the AI to generate relevant health tips in a structured format.
  */
 const personalizedHealthTipsPrompt = ai.definePrompt({
   name: 'personalizedHealthTipsPrompt',
@@ -61,7 +67,10 @@ const personalizedHealthTipsPrompt = ai.definePrompt({
 
 Symptoms: {{{symptoms}}}
 
-Health Tips:`,
+Please provide a response in three parts:
+1.  **Symptom Analysis:** A brief analysis and potential interpretation of the symptoms provided.
+2.  **Recommended Cure:** Recommended non-medicinal actions, home remedies, or lifestyle adjustments.
+3.  **Suggested Medicines:** A list of suggested over-the-counter medicines. **Crucially, you must include a strong disclaimer that a doctor should be consulted before taking any medication.**`,
 });
 
 /**

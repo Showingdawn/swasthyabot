@@ -11,9 +11,6 @@ export function Footer() {
             <span className="font-bold">SwasthyaBot</span>
           </Link>
         </div>
-         <p className="text-xs text-muted-foreground text-center">
-          A Smart India Hackathon Project
-        </p>
         <p className="max-w-md text-balance text-center text-sm text-muted-foreground">
           <strong>Disclaimer:</strong> This is an AI-powered tool for informational
           purposes only and not a substitute for professional medical advice.

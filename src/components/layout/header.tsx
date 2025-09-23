@@ -20,7 +20,6 @@ export function Header() {
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Power BI Portal', href: '/power-bi-portal' },
-    { name: 'GitHub', href: 'https://github.com/GoogleCloudPlatform/firebase-genkit-samples/tree/main/studio-apps/swasthya-lite', external: true },
   ];
 
   return (

@@ -8,7 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { SubmitButton } from '@/components/submit-button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Lightbulb, TriangleAlert } from 'lucide-react';
+import { Pill, Lightbulb, TriangleAlert, Stethoscope } from 'lucide-react';
+import { Separator } from './ui/separator';
 
 const initialState = {
   message: '',
@@ -50,15 +51,32 @@ export function SymptomChecker() {
 
             {state.data && (
             <div className="w-full space-y-6 pt-4">
-              <Alert>
-                <Lightbulb className="h-4 w-4" />
-                <AlertTitle>Personalized Health Tips</AlertTitle>
-                <AlertDescription>
-                  <div className="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                    {state.data.healthTips}
-                  </div>
-                </AlertDescription>
-              </Alert>
+              <div className="space-y-4">
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-semibold">
+                    <Stethoscope className="h-5 w-5 text-primary" />
+                    Symptom Analysis
+                  </h3>
+                  <p className="text-muted-foreground prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">{state.data.symptomAnalysis}</p>
+                </div>
+                <Separator />
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-semibold">
+                    <Lightbulb className="h-5 w-5 text-primary" />
+                    Recommended Cure
+                  </h3>
+                  <p className="text-muted-foreground prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">{state.data.recommendedCure}</p>
+                </div>
+                <Separator />
+                <div>
+                  <h3 className="mb-2 flex items-center gap-2 font-semibold">
+                    <Pill className="h-5 w-5 text-primary" />
+                    Suggested Medicines
+                  </h3>
+                  <p className="text-muted-foreground prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">{state.data.suggestedMedicines}</p>
+                </div>
+              </div>
+
 
               <Alert variant="destructive">
                 <TriangleAlert className="h-4 w-4" />
