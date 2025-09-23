@@ -43,8 +43,6 @@ export function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                target={item.external ? '_blank' : undefined}
-                rel={item.external ? 'noopener noreferrer' : undefined}
                 className="text-muted-foreground/70 transition-colors hover:text-muted-foreground"
               >
                 {item.name}
@@ -60,8 +58,8 @@ export function Header() {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>English</DropdownMenuItem>
-              <DropdownMenuItem disabled>ଓଡ଼ିଆ (Coming Soon)</DropdownMenuItem>
-              <DropdownMenuItem disabled>हिन्दी (Coming Soon)</DropdownMenuItem>
+              <DropdownMenuItem>ଓଡ଼ିଆ</DropdownMenuItem>
+              <DropdownMenuItem>हिन्दी</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -78,8 +76,6 @@ export function Header() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    target={item.external ? '_blank' : undefined}
-                    rel={item.external ? 'noopener noreferrer' : undefined}
                     className="text-muted-foreground hover:text-foreground"
                   >
                     {item.name}
