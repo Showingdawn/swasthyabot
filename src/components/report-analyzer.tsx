@@ -8,8 +8,6 @@ import { Input } from '@/components/ui/input';
 import { SubmitButton } from '@/components/submit-button';
 import { useState, useRef } from 'react';
 import { analyzeReportAction } from '@/app/actions';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { Image as ImageIcon, TriangleAlert } from 'lucide-react';
 import Image from 'next/image';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './ui/table';
 
@@ -103,14 +101,6 @@ export function ReportAnalyzer() {
                     </Table>
                 </div>
               )}
-
-              <Alert>
-                <TriangleAlert className="h-4 w-4" />
-                <AlertTitle>Important Disclaimer</AlertTitle>
-                <AlertDescription>
-                  This AI-powered analysis is for informational purposes only. Always verify the extracted information with the original document and consult a healthcare professional.
-                </AlertDescription>
-              </Alert>
             </div>
           )}
         </CardFooter>
@@ -118,4 +108,3 @@ export function ReportAnalyzer() {
     </Card>
   );
 }
-

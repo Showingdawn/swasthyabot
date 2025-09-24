@@ -7,8 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { SubmitButton } from '@/components/submit-button';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Pill, Lightbulb, TriangleAlert, Stethoscope, Mic, MicOff } from 'lucide-react';
+import { Pill, Lightbulb, Stethoscope, Mic, MicOff } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from './ui/button';
@@ -141,15 +140,6 @@ export function SymptomChecker() {
                   <p className="text-muted-foreground prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">{state.data.suggestedMedicines}</p>
                 </div>
               </div>
-
-
-              <Alert variant="destructive">
-                <TriangleAlert className="h-4 w-4" />
-                <AlertTitle>Important Disclaimer</AlertTitle>
-                <AlertDescription>
-                  This information is AI-generated and for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment.
-                </AlertDescription>
-              </Alert>
             </div>
           )}
         </CardFooter>

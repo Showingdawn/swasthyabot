@@ -1,12 +1,11 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { findNearbyServicesAction } from '@/app/actions';
-import { Alert, AlertDescription, AlertTitle } from './ui/alert';
-import { Loader2, MapPin, Navigation, TriangleAlert } from 'lucide-react';
+import { Loader2, MapPin, Navigation } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { FindNearbyServicesOutput } from '@/ai/flows/nearby-services-flow';
 
@@ -17,6 +16,7 @@ export function NearbyServicesFinder() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<FindNearbyServicesOutput | null>(null);
+  const [activeService, setActiveService] = useState<ServiceType | null>(null);
   const { toast } = useToast();
 
   const getLocation = () => {
@@ -70,6 +70,7 @@ export function NearbyServicesFinder() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setActiveService(serviceType);
     try {
       const res = await findNearbyServicesAction(location.latitude, location.longitude, serviceType);
       if (res.message === 'success' && res.data) {
@@ -107,16 +108,16 @@ export function NearbyServicesFinder() {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-            <Button onClick={() => handleFindServices('hospital')} disabled={loading || !location}>
+            <Button variant={activeService === 'hospital' ? 'default' : 'outline'} onClick={() => handleFindServices('hospital')} disabled={loading || !location}>
                 Find Hospitals
             </Button>
-            <Button onClick={() => handleFindServices('pharmacy')} disabled={loading || !location}>
+            <Button variant={activeService === 'pharmacy' ? 'default' : 'outline'} onClick={() => handleFindServices('pharmacy')} disabled={loading || !location}>
                 Find Pharmacies
             </Button>
-            <Button onClick={() => handleFindServices('clinic')} disabled={loading || !location}>
+            <Button variant={activeService === 'clinic' ? 'default' : 'outline'} onClick={() => handleFindServices('clinic')} disabled={loading || !location}>
                 Find Clinics
             </Button>
-            <Button onClick={() => handleFindServices('blood bank')} disabled={loading || !location}>
+            <Button variant={activeService === 'blood bank' ? 'default' : 'outline'} onClick={() => handleFindServices('blood bank')} disabled={loading || !location}>
                 Find Blood Banks
             </Button>
         </div>
@@ -132,21 +133,21 @@ export function NearbyServicesFinder() {
                 <ul className="space-y-4">
                 {result.services.map((service, index) => (
                     <li key={index} className="rounded-lg border p-4">
-                    <h4 className="font-bold">{service.name}</h4>
-                    <p className="text-sm text-muted-foreground">{service.address}</p>
-                    <p className="text-sm font-semibold text-primary">{service.distance}</p>
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <h4 className="font-bold">{service.name}</h4>
+                          <p className="text-sm text-muted-foreground">{service.address}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-sm font-semibold text-primary">{service.distance}</p>
+                        </div>
+                      </div>
                     </li>
                 ))}
                 </ul>
             ) : (
                 <p>No services found nearby.</p>
             )}
-
-            <Alert>
-                <TriangleAlert className="h-4 w-4" />
-                <AlertTitle>Disclaimer</AlertTitle>
-                <AlertDescription>{result.disclaimer}</AlertDescription>
-            </Alert>
           </div>
         )}
       </CardContent>

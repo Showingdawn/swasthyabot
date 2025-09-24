@@ -66,14 +66,6 @@ export function MentalHealthAssistant() {
                   </AlertDescription>
                 </Alert>
               )}
-
-              <Alert>
-                <TriangleAlert className="h-4 w-4" />
-                <AlertTitle>Important Disclaimer</AlertTitle>
-                <AlertDescription>
-                  This is an AI assistant. It is not a substitute for professional mental health support. If you are in crisis, please contact a qualified professional.
-                </AlertDescription>
-              </Alert>
             </div>
           )}
         </CardFooter>
