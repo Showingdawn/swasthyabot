@@ -8,8 +8,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { SubmitButton } from '@/components/submit-button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Pill, Lightbulb, TriangleAlert, Stethoscope } from 'lucide-react';
+import { Pill, Lightbulb, TriangleAlert, Stethoscope, Mic, MicOff } from 'lucide-react';
 import { Separator } from './ui/separator';
+import { useState, useEffect, useRef } from 'react';
+import { Button } from './ui/button';
+import { useTranslation } from '@/context/translation-context';
 
 const initialState = {
   message: '',
@@ -19,11 +22,58 @@ const initialState = {
 
 export function SymptomChecker() {
   const [state, formAction] = useFormState(getHealthTipsAction, initialState as any);
+  const { t } = useTranslation();
+  const [isListening, setIsListening] = useState(false);
+  const [symptomText, setSymptomText] = useState('');
+  const recognitionRef = useRef<any>(null);
+
+  useEffect(() => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onresult = (event) => {
+        let interimTranscript = '';
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+            finalTranscript += event.results[i][0].transcript;
+          } else {
+            interimTranscript += event.results[i][0].transcript;
+          }
+        }
+        setSymptomText(symptomText + finalTranscript + interimTranscript);
+      };
+      
+      recognitionRef.current = recognition;
+    }
+
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.stop();
+      }
+    };
+  }, [symptomText]);
+  
+  const handleToggleListening = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+    } else {
+       if (recognitionRef.current) {
+         setSymptomText(''); // Clear previous text on new recording
+         recognitionRef.current.start();
+       }
+    }
+    setIsListening(!isListening);
+  };
+
 
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Symptom Checker & Health Tips</CardTitle>
+        <CardTitle>{t('home.tabs.symptomChecker')}</CardTitle>
         <CardDescription>
           Describe your symptoms to receive personalized, AI-generated tips.
         </CardDescription>
@@ -32,13 +82,28 @@ export function SymptomChecker() {
         <CardContent>
           <div className="space-y-2">
             <Label htmlFor="symptoms">Describe your symptoms</Label>
-            <Textarea
-              id="symptoms"
-              name="symptoms"
-              placeholder="e.g., 'For the last two days, I have had a sore throat, a mild fever of 100°F, and a persistent dry cough.'"
-              className="min-h-[120px]"
-              required
-            />
+            <div className="relative">
+              <Textarea
+                id="symptoms"
+                name="symptoms"
+                placeholder="e.g., 'For the last two days, I have had a sore throat, a mild fever of 100°F, and a persistent dry cough.'"
+                className="min-h-[120px] pr-12"
+                required
+                value={symptomText}
+                onChange={(e) => setSymptomText(e.target.value)}
+              />
+              <Button
+                type="button"
+                size="icon"
+                variant={isListening ? "destructive" : "outline"}
+                className="absolute bottom-2 right-2 h-8 w-8"
+                onClick={handleToggleListening}
+                title="Use voice input"
+              >
+                {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                <span className="sr-only">{isListening ? 'Stop listening' : 'Start listening'}</span>
+              </Button>
+            </div>
             {state?.errors?.symptoms && <p className="text-sm font-medium text-destructive">{state.errors.symptoms[0]}</p>}
           </div>
         </CardContent>
