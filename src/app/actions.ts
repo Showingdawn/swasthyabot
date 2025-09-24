@@ -6,6 +6,7 @@ import { filterFakeNews } from '@/ai/flows/fake-news-filtering';
 import { getMentalHealthAdvice } from '@/ai/flows/mental-health-assistant';
 import { personalizedHealthTips } from '@/ai/flows/personalized-health-tips';
 import { analyzeReport } from '@/ai/flows/report-analyzer-flow';
+import { findNearbyServices } from '@/ai/flows/nearby-services-flow';
 
 const symptomsSchema = z
   .string()
@@ -23,6 +24,13 @@ const feelingsSchema = z
   .max(1000, 'Please keep your description under 1000 characters.');
 
 const imageSchema = z.instanceof(File).refine((file) => file.size > 0, { message: 'Image is required.' });
+
+const locationSchema = z.object({
+    latitude: z.number(),
+    longitude: z.number(),
+    serviceType: z.enum(['hospital', 'pharmacy', 'clinic', 'blood bank']),
+});
+
 
 // Helper to convert file to data URI
 async function fileToDataURI(file: File) {
@@ -129,5 +137,28 @@ export async function analyzeReportAction(
     } catch (e) {
         console.error(e);
         return { message: 'AI error. Please try again later.', data: null, errors: null };
+    }
+}
+
+export async function findNearbyServicesAction(
+    latitude: number,
+    longitude: number,
+    serviceType: 'hospital' | 'pharmacy' | 'clinic' | 'blood bank'
+) {
+    const validatedFields = locationSchema.safeParse({ latitude, longitude, serviceType });
+
+    if (!validatedFields.success) {
+        return {
+            message: 'Invalid location or service type.',
+            data: null,
+        };
+    }
+
+    try {
+        const result = await findNearbyServices(validatedFields.data);
+        return { message: 'success', data: result };
+    } catch (e) {
+        console.error(e);
+        return { message: 'AI error. Please try again later.', data: null };
     }
 }

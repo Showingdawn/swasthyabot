@@ -9,11 +9,12 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { SymptomChecker } from '@/components/symptom-checker';
 import { FakeNewsFilter } from '@/components/fake-news-filter';
-import { FileScan, HeartPulse, Newspaper, Stethoscope } from 'lucide-react';
+import { FileScan, HeartPulse, Map, Newspaper, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslation } from '@/context/translation-context';
 import { MentalHealthAssistant } from '@/components/mental-health-assistant';
 import { ReportAnalyzer } from '@/components/report-analyzer';
+import { NearbyServicesFinder } from '@/components/nearby-services-finder';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image-gov');
@@ -65,7 +66,7 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="mx-auto w-full max-w-3xl">
               <Tabs defaultValue="symptom-checker">
-                <TabsList className="grid w-full grid-cols-4">
+                <TabsList className="grid w-full grid-cols-5">
                   <TabsTrigger value="symptom-checker">
                     <Stethoscope className="mr-2 h-4 w-4" />
                     {t('home.tabs.symptomChecker')}
@@ -82,6 +83,10 @@ export default function Home() {
                     <FileScan className="mr-2 h-4 w-4" />
                     {t('home.tabs.reportAnalyzer')}
                   </TabsTrigger>
+                  <TabsTrigger value="nearby-services">
+                    <Map className="mr-2 h-4 w-4" />
+                    {t('home.tabs.nearbyServices')}
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="symptom-checker" className="mt-4">
                   <SymptomChecker />
@@ -94,6 +99,9 @@ export default function Home() {
                 </TabsContent>
                 <TabsContent value="report-analyzer" className="mt-4">
                   <ReportAnalyzer />
+                </TabsContent>
+                <TabsContent value="nearby-services" className="mt-4">
+                  <NearbyServicesFinder />
                 </TabsContent>
               </Tabs>
             </div>

@@ -19,7 +19,8 @@
       "symptomChecker": "लक्षण परीक्षक",
       "newsVerifier": "समाचार सत्यापनकर्ता",
       "mentalHealthAssistant": "मानसिक स्वास्थ्य",
-      "reportAnalyzer": "रिपोर्ट विश्लेषक"
+      "reportAnalyzer": "रिपोर्ट विश्लेषक",
+      "nearbyServices": "आस-पास सेवाएं"
     }
   },
   "footer": {

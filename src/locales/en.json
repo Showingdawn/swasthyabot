@@ -19,7 +19,8 @@
       "symptomChecker": "Symptom Checker",
       "newsVerifier": "News Verifier",
       "mentalHealthAssistant": "Mental Health",
-      "reportAnalyzer": "Report Analyzer"
+      "reportAnalyzer": "Report Analyzer",
+      "nearbyServices": "Nearby Services"
     }
   },
   "footer": {
