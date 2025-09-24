@@ -17,7 +17,7 @@ export default function AnalysisPortal() {
                 <div>
                   <CardTitle className="text-2xl">Analysis Portal</CardTitle>
                   <CardDescription>
-                    Visualizing Health Data for the State of Odisha
+                    Health Data
                   </CardDescription>
                 </div>
               </div>
