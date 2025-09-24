@@ -17,7 +17,8 @@
     },
     "tabs": {
       "symptomChecker": "Symptom Checker",
-      "newsVerifier": "News Verifier"
+      "newsVerifier": "News Verifier",
+      "mentalHealthAssistant": "Mental Health"
     }
   },
   "footer": {

@@ -9,9 +9,10 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { SymptomChecker } from '@/components/symptom-checker';
 import { FakeNewsFilter } from '@/components/fake-news-filter';
-import { Newspaper, Stethoscope } from 'lucide-react';
+import { HeartPulse, Newspaper, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslation } from '@/context/translation-context';
+import { MentalHealthAssistant } from '@/components/mental-health-assistant';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image-gov');
@@ -63,7 +64,7 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="mx-auto w-full max-w-3xl">
               <Tabs defaultValue="symptom-checker">
-                <TabsList className="grid w-full grid-cols-2">
+                <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="symptom-checker">
                     <Stethoscope className="mr-2 h-4 w-4" />
                     {t('home.tabs.symptomChecker')}
@@ -72,12 +73,19 @@ export default function Home() {
                     <Newspaper className="mr-2 h-4 w-4" />
                     {t('home.tabs.newsVerifier')}
                   </TabsTrigger>
+                  <TabsTrigger value="mental-health">
+                    <HeartPulse className="mr-2 h-4 w-4" />
+                    {t('home.tabs.mentalHealthAssistant')}
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="symptom-checker" className="mt-4">
                   <SymptomChecker />
                 </TabsContent>
                 <TabsContent value="news-filter" className="mt-4">
                   <FakeNewsFilter />
+                </TabsContent>
+                <TabsContent value="mental-health" className="mt-4">
+                  <MentalHealthAssistant />
                 </TabsContent>
               </Tabs>
             </div>

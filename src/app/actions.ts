@@ -3,6 +3,7 @@
 
 import { z } from 'zod';
 import { filterFakeNews } from '@/ai/flows/fake-news-filtering';
+import { getMentalHealthAdvice } from '@/ai/flows/mental-health-assistant';
 import { personalizedHealthTips } from '@/ai/flows/personalized-health-tips';
 
 const symptomsSchema = z
@@ -14,6 +15,12 @@ const newsSchema = z
   .string()
   .min(50, 'Please provide a longer news article for better analysis (at least 50 characters).')
   .max(5000, 'Please keep the article under 5000 characters.');
+
+const feelingsSchema = z
+  .string()
+  .min(10, 'Please describe your feelings in more detail (at least 10 characters).')
+  .max(1000, 'Please keep your description under 1000 characters.');
+
 
 export async function getHealthTipsAction(
   prevState: any,
@@ -60,6 +67,30 @@ export async function checkFakeNewsAction(
   
   try {
     const result = await filterFakeNews({ newsArticle: validatedFields.data });
+    return { message: 'success', data: result, errors: null };
+  } catch (e) {
+    console.error(e);
+    return { message: 'AI error. Please try again later.', data: null, errors: null };
+  }
+}
+
+export async function getMentalHealthAdviceAction(
+  prevState: any,
+  formData: FormData
+) {
+  const userFeelings = formData.get('userFeelings') as string;
+  const validatedFields = feelingsSchema.safeParse(userFeelings);
+
+  if (!validatedFields.success) {
+    return {
+      message: 'Invalid input',
+      errors: validatedFields.error.flatten().fieldErrors,
+      data: null,
+    };
+  }
+  
+  try {
+    const result = await getMentalHealthAdvice({ userFeelings: validatedFields.data });
     return { message: 'success', data: result, errors: null };
   } catch (e) {
     console.error(e);

@@ -17,7 +17,8 @@
     },
     "tabs": {
       "symptomChecker": "लक्षण परीक्षक",
-      "newsVerifier": "समाचार सत्यापनकर्ता"
+      "newsVerifier": "समाचार सत्यापनकर्ता",
+      "mentalHealthAssistant": "मानसिक स्वास्थ्य"
     }
   },
   "footer": {
