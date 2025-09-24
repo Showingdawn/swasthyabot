@@ -1,9 +1,10 @@
+
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { AreaChart } from 'lucide-react';
 
-export default function PowerBIPortal() {
+export default function AnalysisPortal() {
   return (
     <div className="flex min-h-dvh flex-col">
       <Header />
@@ -14,7 +15,7 @@ export default function PowerBIPortal() {
               <div className="flex items-center gap-4">
                 <AreaChart className="h-8 w-8 text-primary" />
                 <div>
-                  <CardTitle className="text-2xl">Power BI Analytics Portal</CardTitle>
+                  <CardTitle className="text-2xl">Analysis Portal</CardTitle>
                   <CardDescription>
                     Visualizing Health Data for the State of Odisha
                   </CardDescription>
