@@ -18,7 +18,8 @@
     "tabs": {
       "symptomChecker": "ଲକ୍ଷଣ ଯାଞ୍ଚକାରୀ",
       "newsVerifier": "ଖବର ସତ୍ୟାପକ",
-      "mentalHealthAssistant": "ମାନସିକ ସ୍ୱାସ୍ଥ୍ୟ"
+      "mentalHealthAssistant": "ମାନସିକ ସ୍ୱାସ୍ଥ୍ୟ",
+      "reportAnalyzer": "ରିପୋର୍ଟ ବିଶ୍ଳେଷକ"
     }
   },
   "footer": {

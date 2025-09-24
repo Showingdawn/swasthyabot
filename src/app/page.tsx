@@ -9,10 +9,11 @@ import { Header } from '@/components/layout/header';
 import { Footer } from '@/components/layout/footer';
 import { SymptomChecker } from '@/components/symptom-checker';
 import { FakeNewsFilter } from '@/components/fake-news-filter';
-import { HeartPulse, Newspaper, Stethoscope } from 'lucide-react';
+import { FileScan, HeartPulse, Newspaper, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslation } from '@/context/translation-context';
 import { MentalHealthAssistant } from '@/components/mental-health-assistant';
+import { ReportAnalyzer } from '@/components/report-analyzer';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((p) => p.id === 'hero-image-gov');
@@ -64,7 +65,7 @@ export default function Home() {
           <div className="container px-4 md:px-6">
             <div className="mx-auto w-full max-w-3xl">
               <Tabs defaultValue="symptom-checker">
-                <TabsList className="grid w-full grid-cols-3">
+                <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="symptom-checker">
                     <Stethoscope className="mr-2 h-4 w-4" />
                     {t('home.tabs.symptomChecker')}
@@ -77,6 +78,10 @@ export default function Home() {
                     <HeartPulse className="mr-2 h-4 w-4" />
                     {t('home.tabs.mentalHealthAssistant')}
                   </TabsTrigger>
+                  <TabsTrigger value="report-analyzer">
+                    <FileScan className="mr-2 h-4 w-4" />
+                    {t('home.tabs.reportAnalyzer')}
+                  </TabsTrigger>
                 </TabsList>
                 <TabsContent value="symptom-checker" className="mt-4">
                   <SymptomChecker />
@@ -86,6 +91,9 @@ export default function Home() {
                 </TabsContent>
                 <TabsContent value="mental-health" className="mt-4">
                   <MentalHealthAssistant />
+                </TabsContent>
+                <TabsContent value="report-analyzer" className="mt-4">
+                  <ReportAnalyzer />
                 </TabsContent>
               </Tabs>
             </div>

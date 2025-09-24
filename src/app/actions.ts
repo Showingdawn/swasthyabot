@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { filterFakeNews } from '@/ai/flows/fake-news-filtering';
 import { getMentalHealthAdvice } from '@/ai/flows/mental-health-assistant';
 import { personalizedHealthTips } from '@/ai/flows/personalized-health-tips';
+import { analyzeReport } from '@/ai/flows/report-analyzer-flow';
 
 const symptomsSchema = z
   .string()
@@ -21,6 +22,14 @@ const feelingsSchema = z
   .min(10, 'Please describe your feelings in more detail (at least 10 characters).')
   .max(1000, 'Please keep your description under 1000 characters.');
 
+const imageSchema = z.instanceof(File).refine((file) => file.size > 0, { message: 'Image is required.' });
+
+// Helper to convert file to data URI
+async function fileToDataURI(file: File) {
+  const arrayBuffer = await file.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  return `data:${file.type};base64,${buffer.toString('base64')}`;
+}
 
 export async function getHealthTipsAction(
   prevState: any,
@@ -96,4 +105,29 @@ export async function getMentalHealthAdviceAction(
     console.error(e);
     return { message: 'AI error. Please try again later.', data: null, errors: null };
   }
+}
+
+export async function analyzeReportAction(
+  prevState: any,
+  formData: FormData
+) {
+    const imageFile = formData.get('reportImage');
+    const validatedFields = imageSchema.safeParse(imageFile);
+
+    if (!validatedFields.success) {
+        return {
+            message: 'Invalid input',
+            errors: { reportImage: ["Please upload a valid image."] },
+            data: null,
+        };
+    }
+
+    try {
+        const dataUri = await fileToDataURI(validatedFields.data);
+        const result = await analyzeReport({ reportImage: dataUri });
+        return { message: 'success', data: result, errors: null };
+    } catch (e) {
+        console.error(e);
+        return { message: 'AI error. Please try again later.', data: null, errors: null };
+    }
 }
